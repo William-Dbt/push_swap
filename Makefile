@@ -6,7 +6,7 @@
 #    By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 14:12:28 by wdebotte          #+#    #+#              #
-#    Updated: 2022/02/18 16:32:47 by wdebotte         ###   ########.fr        #
+#    Updated: 2022/02/18 16:38:10 by wdebotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ PATHNULL	= /dev/null
 
 SRCS		= ${PATHSRCS}push_swap.c
 OBJS		= ${SRCS:.c=.o}
-HEADERS		= ${PATHHEADERS}push_swap.h
 
 CC			= clang
 CFLAGS		= -Wall -Wextra -Werror
@@ -42,10 +41,6 @@ INCS		= -I${PATHHEADERS} -I${PATHLIBFT}${PATHHEADERS}
 
 RM			= rm -rf
 MAKE		= make -C
-
-NORM		= norminette
-FLAGNORMC	= -R CheckForbiddenSourceHeader
-FLAGNORMH	= -R CheckDefine
 
 LIBFT		= -L${PATHLIBFT} -lft
 
@@ -76,14 +71,6 @@ fclean:		clean
 
 re:			fclean all
 
-norminette:
-				@echo "${BOLD}${YELLOW}Norminette:${END}\tAll .c files"
-				${NORM} ${FLAGNORMC} ${SRCS}
-				@echo "${BOLD}${GREEN}Norminette:${END}\tOK !"
-				@echo "${BOLD}${YELLOW}Norminette:${END}\tAll .h files"
-				${NORM} ${FLAGNORMH} ${HEADERS}
-				@echo "${BOLD}${GREEN}Norminette:${END}\tOK !"
-
-.PHONY:		all clean fclean re norminette
+.PHONY:		all clean fclean re
 
 ################################################################################
