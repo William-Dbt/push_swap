@@ -6,37 +6,24 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/18 17:00:40 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:14:59 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_check_args(int args, char **argv)
-{
-	int	i;
-	int	n;
-
-	i = 1;
-	while (i <= args)
-	{
-		n = 1;
-		while (i + n <= args)
-		{
-			if ()
-		}
-	}
-}
-
 int	main(int args, char **argv)
 {
-	t_stack stack_a;
+	t_infos	infos;
+	int		i;
 
-	if (args <= 2)
-	{
-		ft_printf("Usage: ./push_swap [int 0] [int 1] [...]\n");
-		return (1);
-	}
-	ft_check_args(args, argv);
+	i = 0;
+	if (args < 2)
+		return (ft_printf("\n"));
+	infos.nb_args = ft_count_args(argv);
+	infos.tab = ft_fill_tab(infos.nb_args, argv);
+	while (infos.nb_args-- > 0)
+		ft_printf("%i\n", infos.tab[i++]);
+	free(infos.tab);
 	return (0);
 }

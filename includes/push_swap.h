@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/18 16:49:27 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/21 16:21:56 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct s_stack
+typedef struct s_infos
 {
-	int		content;
-	void	*next;
-}	t_stack;
+	int	nb_args;
+	int	*tab;
+}	t_infos;
+
+int		ft_count_args(char **argv);
+int		*ft_fill_tab(int nb_args, char **argv);
+int		ft_exit(int *int_tab, char **str_tab);
+
+void	ft_freetab(int *int_tab, char **tab);
 
 #endif

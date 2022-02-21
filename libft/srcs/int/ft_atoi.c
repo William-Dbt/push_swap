@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:41:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/01/08 18:43:32 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/21 16:59:52 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int	ft_is_whitespace(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long long int	ft_atoi(const char *str)
 {
-	int			is_negativ;
-	long int	number;
+	int				is_negativ;
+	long long int	number;
 
 	number = 0;
 	is_negativ = 1;
