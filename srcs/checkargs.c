@@ -6,33 +6,37 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:42:45 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/21 17:18:03 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:48:05 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+#define SPLIT	1
+#define TAB		2
+
 int	ft_count_args(char **argv)
 {
-	int		i[3];
+	int		i[2];
+	int		args;
 	char	**tmp;
 
 	i[0] = 0;
-	i[1] = 0;
+	args = 0;
 	while (argv[++i[0]] != NULL)
 	{
 		if (ft_strchr(argv[i[0]], ' '))
 		{
-			i[2] = 0;
+			i[SPLIT] = 0;
 			tmp = ft_split(argv[i[0]], ' ');
-			while (tmp[i[2]++] != NULL)
-				i[1]++;
+			while (tmp[i[SPLIT]++] != NULL)
+				args++;
 			ft_freetab(NULL, tmp);
 		}
 		else
-			i[1]++;
+			args++;
 	}
-	return (i[1]);
+	return (args);
 }
 
 int	ft_add_to_tab(int *int_tab, char *str, char **str_tab)
@@ -84,19 +88,19 @@ int	*ft_fill_tab(int nb_args, char **argv)
 	if (tab == NULL)
 		return (NULL);
 	i[0] = 0;
-	i[1] = 0;
+	i[TAB] = 0;
 	while (argv[++i[0]] != NULL)
 	{
 		if (ft_strchr(argv[i[0]], ' '))
 		{
-			i[2] = 0;
+			i[SPLIT] = 0;
 			tmp = ft_split(argv[i[0]], ' ');
-			while (tmp[i[2]] != NULL)
-				tab[i[1]++] = ft_add_to_tab(tab, tmp[i[2]++], tmp);
+			while (tmp[i[SPLIT]] != NULL)
+				tab[i[TAB]++] = ft_add_to_tab(tab, tmp[i[SPLIT]++], tmp);
 			ft_freetab(NULL, tmp);
 		}
 		else
-			tab[i[1]++] = ft_add_to_tab(tab, argv[i[0]], NULL);
+			tab[i[TAB]++] = ft_add_to_tab(tab, argv[i[0]], NULL);
 	}
 	ft_check_tab(tab, nb_args);
 	return (tab);
