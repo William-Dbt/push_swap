@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/22 15:52:05 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:48:32 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	ft_print_stack(t_stack *stack_a, t_stack *stack_b)
 	tmp_b = stack_b;
 	while (tmp_a != NULL || tmp_b != NULL)
 	{
-		if (tmp_b != NULL)
+		if (tmp_b != NULL && tmp_a != NULL)
 			ft_printf("%i\t\t| %i\n", tmp_a->content, tmp_b->content);
-		else
+		else if (tmp_b == NULL)
 			ft_printf("%i\t\t| (NULL)\n", tmp_a->content);
+		else
+			ft_printf("(NULL)\t\t| %i\n", tmp_b->content);
 		if (tmp_a != NULL)
 			tmp_a = tmp_a->next;
 		if (tmp_b != NULL)
@@ -59,11 +61,12 @@ int	main(int args, char **argv)
 	infos.nb_args = ft_count_args(argv);
 	infos.tab = ft_fill_tab(infos.nb_args, argv);
 	ft_init_stack(&infos);
-	
-	//ft_swap(infos.stack_a);
-	ft_push(infos.stack_a, infos.stack_b);
 
+	int	i = 0;
+	while (i++ < infos.nb_args)
+		ft_push(&infos.stack_a, &infos.stack_b);
 	ft_print_stack(infos.stack_a, infos.stack_b);
+
 	ft_freestack(infos.stack_a);
 	ft_freestack(infos.stack_b);
 	ft_freetab(infos.tab, NULL);
