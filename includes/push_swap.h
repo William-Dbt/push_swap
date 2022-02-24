@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/23 16:42:48 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/24 11:15:45 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ int		ft_exit(int *int_tab, char **str_tab);
 
 void	ft_freetab(int *int_tab, char **tab);
 void	ft_freestack(t_stack *stack);
-void	ft_swap(t_stack *stack);
+void	ft_swap(t_stack **stack);
 void	ft_push(t_stack **stackfrom, t_stack **stackto);
 void	ft_rotate(t_stack **stack);
+void	ft_rrotate(t_stack **stack);
 
 t_stack	*ft_newlst(int content);
 

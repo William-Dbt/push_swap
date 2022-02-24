@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/23 16:48:32 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/24 11:16:06 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_print_stack(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*tmp_a;
-	t_stack *tmp_b;
+	t_stack	*tmp_b;
 
 	tmp_a = stack_a;
 	tmp_b = stack_b;
@@ -50,25 +50,22 @@ void	ft_init_stack(t_infos *infos)
 		tmp->next = next;
 		tmp = next;
 	}
+	ft_freetab(infos->tab, NULL);
 }
 
 int	main(int args, char **argv)
 {
 	t_infos	infos;
 
-	if (args < 2)
-		return (ft_printf("\n"));
+	if (args <= 1)
+		return (0);
 	infos.nb_args = ft_count_args(argv);
 	infos.tab = ft_fill_tab(infos.nb_args, argv);
 	ft_init_stack(&infos);
 
-	int	i = 0;
-	while (i++ < infos.nb_args)
-		ft_push(&infos.stack_a, &infos.stack_b);
+	ft_rrotate(&infos.stack_a);
 	ft_print_stack(infos.stack_a, infos.stack_b);
-
+	
 	ft_freestack(infos.stack_a);
-	ft_freestack(infos.stack_b);
-	ft_freetab(infos.tab, NULL);
 	return (0);
 }

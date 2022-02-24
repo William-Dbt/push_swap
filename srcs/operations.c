@@ -6,23 +6,24 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:34:03 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/23 16:47:11 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/24 11:15:00 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_swap(t_stack *stack)
+void	ft_swap(t_stack **stack)
 {
-	int	tmp;
+	t_stack	*first;
 	t_stack	*second;
 
-	if (stack == NULL || stack->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	tmp = stack->content;
-	second = stack->next;
-	stack->content = second->content;
-	second->content = tmp;
+	first = *stack;
+	second = (*stack)->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
 }
 
 void	ft_push(t_stack **stackfrom, t_stack **stackto)
@@ -30,7 +31,7 @@ void	ft_push(t_stack **stackfrom, t_stack **stackto)
 	t_stack	*tmp_from;
 	t_stack	*tmp_to;
 
-	if (stackfrom == NULL)
+	if (*stackfrom == NULL)
 		return ;
 	tmp_from = *stackfrom;
 	tmp_to = ft_newlst(tmp_from->content);
@@ -42,6 +43,36 @@ void	ft_push(t_stack **stackfrom, t_stack **stackto)
 
 void	ft_rotate(t_stack **stack)
 {
-	if (stack == NULL)
+	t_stack	*tmp;
+	t_stack	*first;
+	t_stack	*second;
+
+	if (*stack == NULL)
 		return ;
+	first = *stack;
+	tmp = *stack;
+	second = (*stack)->next;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = first;
+	first->next = NULL;
+	*stack = second;
+}
+
+void	ft_rrotate(t_stack **stack)
+{
+	t_stack	*tmp;
+	t_stack	*last;
+
+	if (*stack == NULL)
+		return ;
+	tmp = *stack;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = *stack;
+	last = *stack;
+	while (last->next != tmp)
+		last = last->next;
+	last->next = NULL;
+	*stack = tmp;
 }
