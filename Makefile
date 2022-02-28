@@ -6,7 +6,7 @@
 #    By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 14:12:28 by wdebotte          #+#    #+#              #
-#    Updated: 2022/02/22 13:33:51 by wdebotte         ###   ########.fr        #
+#    Updated: 2022/02/28 19:06:23 by wdebotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ PATHNULL	= /dev/null
 SRCS		= ${PATHSRCS}push_swap.c \
 			${PATHSRCS}checkargs.c \
 			${PATHSRCS}utils.c \
-			${PATHSRCS}operations.c
+			${PATHSRCS}operations.c \
+			${PATHSRCS}sorting_short.c
 
 OBJS		= ${SRCS:.c=.o}
 HEADERS		= ${PATHHEADERS}push_swap.h

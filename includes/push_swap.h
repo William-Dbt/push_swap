@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/24 11:15:45 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:10:06 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	ft_swap(t_stack **stack);
 void	ft_push(t_stack **stackfrom, t_stack **stackto);
 void	ft_rotate(t_stack **stack);
 void	ft_rrotate(t_stack **stack);
+void	ft_sort_two(t_stack **stack);
+void	ft_sort_three(t_stack **stack);
+void	ft_sort_five(t_stack **stack_a, t_stack **stack_b);
 
 t_stack	*ft_newlst(int content);
 

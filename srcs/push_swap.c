@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/24 11:16:06 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:08:33 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	main(int args, char **argv)
 	infos.nb_args = ft_count_args(argv);
 	infos.tab = ft_fill_tab(infos.nb_args, argv);
 	ft_init_stack(&infos);
+	if (infos.nb_args == 3)
+		ft_sort_three(&infos.stack_a);
 
-	ft_rrotate(&infos.stack_a);
 	ft_print_stack(infos.stack_a, infos.stack_b);
-	
 	ft_freestack(infos.stack_a);
 	return (0);
 }
