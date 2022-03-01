@@ -6,7 +6,7 @@
 #    By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 14:12:28 by wdebotte          #+#    #+#              #
-#    Updated: 2022/02/28 19:06:23 by wdebotte         ###   ########.fr        #
+#    Updated: 2022/03/01 11:06:38 by wdebotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ PATHHEADERS	= ./includes/
 PATHLIBFT	= ./libft/
 PATHNULL	= /dev/null
 
-SRCS		= ${PATHSRCS}push_swap.c \
+SRCS		= ${PATHSRCS}main.c \
 			${PATHSRCS}checkargs.c \
 			${PATHSRCS}utils.c \
 			${PATHSRCS}operations.c \
