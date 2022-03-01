@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:54:04 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/28 19:06:49 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:59:58 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_get_values(int *tab, int i, t_stack *stack)
 	n = 0;
 	while (n < i)
 	{
-		tab[n++] = (int)stack->content;
+		tab[n++] = stack->content;
 		stack = stack->next;
 	}
 }
