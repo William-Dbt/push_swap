@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/28 19:10:06 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/14 16:35:03 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 # include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
+
+# define SA			0
+# define SB			1
+# define PA			2
+# define PB			3
+# define RA			4
+# define RB			5
+# define RRA		6
+# define RRB		7
+# define STACK_A	10
+# define STACK_B	11
 
 typedef struct s_stack
 {
@@ -29,22 +40,24 @@ typedef struct s_infos
 	int		*tab;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	t_stack	*stack_op;
 }	t_infos;
 
-int		ft_count_args(char **argv);
-int		*ft_fill_tab(int nb_args, char **argv);
-int		ft_exit(int *int_tab, char **str_tab);
+int		count_args(char **argv);
+int		*fill_tab(int nb_args, char **argv);
+int		exit_program(int *int_tab, char **str_tab);
 
-void	ft_freetab(int *int_tab, char **tab);
-void	ft_freestack(t_stack *stack);
-void	ft_swap(t_stack **stack);
-void	ft_push(t_stack **stackfrom, t_stack **stackto);
-void	ft_rotate(t_stack **stack);
-void	ft_rrotate(t_stack **stack);
-void	ft_sort_two(t_stack **stack);
-void	ft_sort_three(t_stack **stack);
-void	ft_sort_five(t_stack **stack_a, t_stack **stack_b);
+void	freetab(int *int_tab, char **tab);
+void	freestack(t_stack *stack);
+void	swap(t_stack **stack, t_stack **stack_op, int stack_name);
+void	push(t_stack **stackfrom, t_stack **stackto, t_stack **stack_op,
+			int stackto_name);
+void	rotate(t_stack **stack, t_stack **stack_op, int stack_name);
+void	rrotate(t_stack **stack, t_stack **stack_op, int stack_name);
+void	sort_two(t_stack **stack, t_stack **stack_op);
+void	sort_three(t_stack **stack, t_stack **stack_op);
+void	print_operation(int operation);
 
-t_stack	*ft_newlst(int content);
+t_stack	*newlst(int content);
 
 #endif

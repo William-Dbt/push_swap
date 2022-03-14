@@ -6,13 +6,13 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/01 13:54:25 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/14 16:08:21 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_print_stack(t_stack *stack_a, t_stack *stack_b)
+void	print_stack(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*tmp_a;
 	t_stack	*tmp_b;
@@ -34,7 +34,39 @@ void	ft_print_stack(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	ft_init_stack(t_infos *infos)
+int	check_next_op(int op, int next_op)
+{
+	if ((op == SA && next_op == SB) || (op == SB && next_op == SA))
+		return (ft_printf("ss\n"));
+	else if ((op == RA && next_op == RB) || (op == RB && next_op == RA))
+		return (ft_printf("rr\n"));
+	else if ((op == RRA && next_op == RRB) || (op == RRB && next_op == RRA))
+		return (ft_printf("rrr\n"));
+	return (0);
+}
+
+void	print_operations(t_stack *stack_op)
+{
+	int		operation;
+	t_stack	*tmp;
+	t_stack	*next;
+
+	tmp = stack_op;
+	while (tmp != NULL)
+	{
+		operation = tmp->content;
+		next = tmp->next;
+		if (next != NULL && check_next_op(next->content, operation))
+		{
+			tmp = next->next;
+			continue ;
+		}
+		print_operation(operation);
+		tmp = tmp->next;
+	}
+}
+
+void	init_stack(t_infos *infos)
 {
 	int		i;
 	t_stack	*tmp;
@@ -42,15 +74,16 @@ void	ft_init_stack(t_infos *infos)
 
 	i = 0;
 	infos->stack_b = NULL;
-	infos->stack_a = ft_newlst(infos->tab[i++]);
+	infos->stack_op = NULL;
+	infos->stack_a = newlst(infos->tab[i++]);
 	tmp = infos->stack_a;
 	while (i < infos->nb_args)
 	{
-		next = ft_newlst(infos->tab[i++]);
+		next = newlst(infos->tab[i++]);
 		tmp->next = next;
 		tmp = next;
 	}
-	ft_freetab(infos->tab, NULL);
+	freetab(infos->tab, NULL);
 }
 
 int	main(int args, char **argv)
@@ -59,16 +92,20 @@ int	main(int args, char **argv)
 
 	if (args <= 1)
 		return (0);
-	infos.nb_args = ft_count_args(argv);
-	infos.tab = ft_fill_tab(infos.nb_args, argv);
-	ft_init_stack(&infos);
+	infos.nb_args = count_args(argv);
+	infos.tab = fill_tab(infos.nb_args, argv);
+	if (infos.tab == NULL)
+		return (0);
+	init_stack(&infos);
 	if (infos.nb_args == 1)
 		return (0);
-	if (infos.nb_args == 2)
-		ft_sort_two(&infos.stack_a);
-	if (infos.nb_args == 3)
-		ft_sort_three(&infos.stack_a);
-	ft_print_stack(infos.stack_a, infos.stack_b);
-	ft_freestack(infos.stack_a);
+	else if (infos.nb_args == 2)
+		sort_two(&infos.stack_a, &infos.stack_op);
+	else if (infos.nb_args == 3)
+		sort_three(&infos.stack_a, &infos.stack_op);
+	print_stack(infos.stack_a, infos.stack_b);
+	print_operations(infos.stack_op);
+	freestack(infos.stack_a);
+	freestack(infos.stack_op);
 	return (0);
 }

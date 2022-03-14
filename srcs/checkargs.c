@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:42:45 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/02/24 10:45:42 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/14 16:08:36 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define SPLIT	1
 #define TAB		2
 
-int	ft_count_args(char **argv)
+int	count_args(char **argv)
 {
 	int		i[2];
 	int		args;
@@ -31,7 +31,7 @@ int	ft_count_args(char **argv)
 			tmp = ft_split(argv[i[0]], ' ');
 			while (tmp[i[SPLIT]++] != NULL)
 				args++;
-			ft_freetab(NULL, tmp);
+			freetab(NULL, tmp);
 		}
 		else
 			args++;
@@ -39,31 +39,33 @@ int	ft_count_args(char **argv)
 	return (args);
 }
 
-int	ft_add_to_tab(int *int_tab, char *str, char **str_tab)
+int	add_to_tab(int *int_tab, char *str, char **str_tab)
 {
 	int			i;
 
 	i = 0;
 	if (str[i] == '\0')
-		return (ft_exit(int_tab, str_tab));
+		return (exit_program(int_tab, str_tab));
 	if (ft_strlen(str) > 1 && (str[i] == '-' || str[i] == '+'))
 		i++;
 	while (str[i] != '\0')
 	{
 		if (!ft_isdigit(str[i]))
-			return (ft_exit(int_tab, str_tab));
+			return (exit_program(int_tab, str_tab));
 		i++;
 	}
 	if (ft_atoi(str) > 2147483647 || ft_atoi(str) < -2147483648)
-		return (ft_exit(int_tab, str_tab));
+		return (exit_program(int_tab, str_tab));
 	return (ft_atoi(str));
 }
 
-void	ft_check_tab(int *tab, int nb_args)
+int	*check_tab(int *tab, int nb_args)
 {
 	int	i;
 	int	n;
+	int	is_sorted;
 
+	is_sorted = 1;
 	i = -1;
 	while (++i < nb_args)
 	{
@@ -72,13 +74,21 @@ void	ft_check_tab(int *tab, int nb_args)
 			break ;
 		while (i + n < nb_args)
 		{
-			if (tab[i + n++] == tab[i])
-				ft_exit(tab, NULL);
+			if (tab[i + n] == tab[i])
+				exit_program(tab, NULL);
+			if (tab[i + n++] < tab[i])
+				is_sorted = 0;
 		}
 	}
+	if (is_sorted)
+	{
+		free(tab);
+		return (NULL);
+	}
+	return (tab);
 }
 
-int	*ft_fill_tab(int nb_args, char **argv)
+int	*fill_tab(int nb_args, char **argv)
 {
 	int		i[3];
 	int		*tab;
@@ -96,12 +106,12 @@ int	*ft_fill_tab(int nb_args, char **argv)
 			i[SPLIT] = 0;
 			tmp = ft_split(argv[i[0]], ' ');
 			while (tmp[i[SPLIT]] != NULL)
-				tab[i[TAB]++] = ft_add_to_tab(tab, tmp[i[SPLIT]++], tmp);
-			ft_freetab(NULL, tmp);
+				tab[i[TAB]++] = add_to_tab(tab, tmp[i[SPLIT]++], tmp);
+			freetab(NULL, tmp);
 		}
 		else
-			tab[i[TAB]++] = ft_add_to_tab(tab, argv[i[0]], NULL);
+			tab[i[TAB]++] = add_to_tab(tab, argv[i[0]], NULL);
 	}
-	ft_check_tab(tab, nb_args);
+	tab = check_tab(tab, nb_args);
 	return (tab);
 }
