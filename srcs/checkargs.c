@@ -6,12 +6,13 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:42:45 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/14 16:08:36 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:19:13 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+#define INDEX	0
 #define SPLIT	1
 #define TAB		2
 
@@ -21,14 +22,14 @@ int	count_args(char **argv)
 	int		args;
 	char	**tmp;
 
-	i[0] = 0;
+	i[INDEX] = 0;
 	args = 0;
-	while (argv[++i[0]] != NULL)
+	while (argv[++i[INDEX]] != NULL)
 	{
-		if (ft_strchr(argv[i[0]], ' '))
+		if (ft_strchr(argv[i[INDEX]], ' '))
 		{
 			i[SPLIT] = 0;
-			tmp = ft_split(argv[i[0]], ' ');
+			tmp = ft_split(argv[i[INDEX]], ' ');
 			while (tmp[i[SPLIT]++] != NULL)
 				args++;
 			freetab(NULL, tmp);
@@ -97,20 +98,20 @@ int	*fill_tab(int nb_args, char **argv)
 	tab = malloc(sizeof(int) * nb_args);
 	if (tab == NULL)
 		return (NULL);
-	i[0] = 0;
+	i[INDEX] = 0;
 	i[TAB] = 0;
-	while (argv[++i[0]] != NULL)
+	while (argv[++i[INDEX]] != NULL)
 	{
-		if (ft_strchr(argv[i[0]], ' '))
+		if (ft_strchr(argv[i[INDEX]], ' '))
 		{
 			i[SPLIT] = 0;
-			tmp = ft_split(argv[i[0]], ' ');
+			tmp = ft_split(argv[i[INDEX]], ' ');
 			while (tmp[i[SPLIT]] != NULL)
 				tab[i[TAB]++] = add_to_tab(tab, tmp[i[SPLIT]++], tmp);
 			freetab(NULL, tmp);
 		}
 		else
-			tab[i[TAB]++] = add_to_tab(tab, argv[i[0]], NULL);
+			tab[i[TAB]++] = add_to_tab(tab, argv[i[INDEX]], NULL);
 	}
 	tab = check_tab(tab, nb_args);
 	return (tab);

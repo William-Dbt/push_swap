@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:43:30 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/14 15:34:37 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:40:19 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,6 @@ t_stack	*newlst(int content)
 	new->content = content;
 	new->next = NULL;
 	return (new);
-}
-
-void	print_operation(int operation)
-{
-	if (operation == SA)
-		ft_printf("sa\n");
-	else if (operation == SB)
-		ft_printf("sb\n");
-	else if (operation == PA)
-		ft_printf("pa\n");
-	else if (operation == PB)
-		ft_printf("pb\n");
-	else if (operation == RA)
-		ft_printf("ra\n");
-	else if (operation == RB)
-		ft_printf("rb\n");
-	else if (operation == RRA)
-		ft_printf("rra\n");
-	else if (operation == RRB)
-		ft_printf("rrb\n");
 }
 
 void	freetab(int *int_tab, char **str_tab)

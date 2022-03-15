@@ -6,26 +6,11 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:34:03 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/14 14:53:38 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:28:22 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	save_operation(t_stack **stack_op, int operation)
-{
-	t_stack	*tmp;
-
-	if (*stack_op == NULL)
-		*stack_op = newlst(operation);
-	else
-	{
-		tmp = *stack_op;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = newlst(operation);
-	}
-}
 
 void	swap(t_stack **stack, t_stack **stack_op, int stack_name)
 {
