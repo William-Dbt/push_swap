@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/15 15:41:02 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:28:43 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	init_stack(t_infos *infos)
 	freetab(infos->tab, NULL);
 }
 
-
 int	main(int args, char **argv)
 {
 	t_infos	infos;
@@ -75,5 +74,4 @@ int	main(int args, char **argv)
 	print_operations(infos.stack_op);
 	freestack(infos.stack_a);
 	freestack(infos.stack_op);
-	return (0);
-}
+

@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 12:06:03 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/15 15:26:24 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:23:17 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	guess_sorting(int nb_args, t_stack **stack_a, t_stack **stack_b,
 				t_stack **stack_op)
 {
-	(void)stack_b;
 	if (nb_args == 2)
 		sort_two(stack_a, stack_op);
 	else if (nb_args == 3)
@@ -59,6 +58,26 @@ int	check_next_op(int op, int next_op)
 	return (0);
 }
 
+void	print_operation(int operation)
+{
+	if (operation == SA)
+		ft_putstr("sa\n");
+	else if (operation == SB)
+		ft_putstr("sb\n");
+	else if (operation == PA)
+		ft_putstr("pa\n");
+	else if (operation == PB)
+		ft_putstr("pb\n");
+	else if (operation == RA)
+		ft_putstr("ra\n");
+	else if (operation == RB)
+		ft_putstr("rb\n");
+	else if (operation == RRA)
+		ft_putstr("rra\n");
+	else if (operation == RRB)
+		ft_putstr("rrb\n");
+}
+
 void	print_operations(t_stack *stack_op)
 {
 	int		operation;
@@ -78,24 +97,4 @@ void	print_operations(t_stack *stack_op)
 		print_operation(operation);
 		tmp = tmp->next;
 	}
-}
-
-void	print_operation(int operation)
-{
-	if (operation == SA)
-		ft_putstr("sa\n");
-	else if (operation == SB)
-		ft_putstr("sb\n");
-	else if (operation == PA)
-		ft_putstr("pa\n");
-	else if (operation == PB)
-		ft_putstr("pb\n");
-	else if (operation == RA)
-		ft_putstr("ra\n");
-	else if (operation == RB)
-		ft_putstr("rb\n");
-	else if (operation == RRA)
-		ft_putstr("rra\n");
-	else if (operation == RRB)
-		ft_putstr("rrb\n");
 }
