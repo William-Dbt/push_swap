@@ -6,22 +6,11 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 12:06:03 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/17 16:23:17 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:12:23 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	guess_sorting(int nb_args, t_stack **stack_a, t_stack **stack_b,
-				t_stack **stack_op)
-{
-	if (nb_args == 2)
-		sort_two(stack_a, stack_op);
-	else if (nb_args == 3)
-		sort_three(stack_a, stack_op);
-	else if (nb_args >= 4)
-		sort_selection(stack_a, stack_b, stack_op);
-}
 
 void	save_operation(t_stack **stack_op, int operation)
 {

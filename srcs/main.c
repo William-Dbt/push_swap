@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/17 16:28:43 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:33:29 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int	main(int args, char **argv)
 	if (infos.nb_args == 1)
 		return (0);
 	else if (infos.nb_args >= 2)
-		guess_sorting(infos.nb_args, &infos.stack_a, &infos.stack_b,
-			&infos.stack_op);
-	//print_stack(infos.stack_a, infos.stack_b);
-	print_operations(infos.stack_op);
+		guess_sorting(&infos);
+	print_stack(infos.stack_a, infos.stack_b);
+	//print_operations(infos.stack_op);
 	freestack(infos.stack_a);
 	freestack(infos.stack_op);
-
+	return (0);
+}

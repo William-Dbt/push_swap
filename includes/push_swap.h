@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/17 16:23:44 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:38:36 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ int		is_sorted(t_stack **stack);
 int		get_min_pos(t_stack	**stack);
 int		get_nb_args(t_stack **stack);
 
+void	guess_sorting(t_infos *infos);
 void	sort_two(t_stack **stack, t_stack **stack_op);
 void	sort_three(t_stack **stack, t_stack **stack_op);
-void	sort_selection(t_stack **stack_a, t_stack **stack_b,
-			t_stack **stack_op);
-void	guess_sorting(int nb_args, t_stack **stack_a, t_stack **stack_b,
-			t_stack **stak_op);
+void	sort_selection(t_infos *infos);
+void	sort_lis(t_infos *infos);
+
+t_stack	*get_lis_sequence(t_stack **stack, int len_sequence, int previous_len);
 // ----------
 
 t_stack	*newlst(int content);
