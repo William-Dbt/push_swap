@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:30:00 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/22 16:16:23 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:42:38 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,44 @@ int	get_nb_args(t_stack *stack)
 	return (args);
 }
 
-/*int	get_min_pos(t_stack **stack)
+int	get_nbr_position(t_stack *stack, int nbr)
 {
 	int		position;
-	int		nbr;
-	int		nbr_position;
 	t_stack	*tmp;
 
-	nbr = (*stack)->content;
-	nbr_position = 1;
-	position = 1;
-	tmp = *stack;
+	position = 0;
+	tmp = stack;
 	while (tmp != NULL)
 	{
-		if (tmp->content < nbr)
-		{
-			nbr = tmp->content;
-			nbr_position = position;
-		}
 		position++;
+		if (tmp->content == nbr)
+			return (position);
 		tmp = tmp->next;
 	}
-	return (nbr_position);
-}*/
+	return (position);
+}
+
+int	get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr)
+{
+	int	position;
+	t_stack	*tmp;
+	t_stack	*next;
+
+	position = 0;
+	if (nbr < stacklim->start_value && nbr > stacklim->end_value)
+		return (position);
+	if (nbr < stacklim->min_value)
+		return (get_nbr_position(stack, stacklim->min_value));
+	else if (nbr > stacklim->max_value)
+		return (get_nbr_position(stack, stacklim->max_value));
+	tmp = stack;
+	while (tmp->next != NULL)
+	{
+		position++;
+		next = tmp->next;
+		if (nbr > tmp->content && nbr < next->content)
+			return (position);
+		tmp = tmp->next;
+	}
+	return (position);
+}
