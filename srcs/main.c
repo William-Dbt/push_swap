@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/21 17:33:29 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/22 15:36:30 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ void	print_stack(t_stack *stack_a, t_stack *stack_b)
 		if (tmp_b != NULL)
 			tmp_b = tmp_b->next;
 	}
+}
+
+void	guess_sorting(t_infos *infos)
+{
+	if (infos->nb_args == 2)
+		sort_two(&infos->stack_a, &infos->stack_op);
+	else if (infos->nb_args == 3)
+		sort_three(&infos->stack_a, &infos->stack_op);
+	else
+		sort_lis(infos);
 }
 
 void	init_stack(t_infos *infos)

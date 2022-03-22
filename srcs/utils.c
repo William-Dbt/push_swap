@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:43:30 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/15 12:40:19 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/22 12:56:52 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	freestack(t_stack *stack)
 		free(stack);
 		stack = tmp;
 	}
+	stack = NULL;
 }
 
 int	exit_program(int *int_tab, char **str_tab)
