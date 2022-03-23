@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:30:00 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/22 21:42:38 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:42:52 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,44 +47,67 @@ int	get_nb_args(t_stack *stack)
 	return (args);
 }
 
-int	get_nbr_position(t_stack *stack, int nbr)
+void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit, int nbr)
 {
-	int		position;
 	t_stack	*tmp;
 
-	position = 0;
-	tmp = stack;
+	tmp = infos->stack_a;
+	stacklimit->start_value = tmp->content;
+	nbr = tmp->content;
 	while (tmp != NULL)
 	{
-		position++;
-		if (tmp->content == nbr)
-			return (position);
+		if (tmp->content < nbr)
+			nbr = tmp->content;
+		if (tmp->next == NULL)
+			stacklimit->end_value = tmp->content;
 		tmp = tmp->next;
 	}
-	return (position);
+	stacklimit->min_value = nbr;
+	tmp = infos->stack_a;
+	nbr = tmp->content;
+	while (tmp != NULL)
+	{
+		if (tmp->content > nbr)
+			nbr = tmp->content;
+		tmp = tmp->next;
+	}
+	stacklimit->max_value = nbr;
+	stacklimit->args_a = get_nb_args(infos->stack_a);
+	stacklimit->args_b = get_nb_args(infos->stack_b);
 }
 
-int	get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr)
+int	get_max_moves(t_infos *infos, t_stacklimit *stacklimit, int nbr)
 {
-	int	position;
-	t_stack	*tmp;
-	t_stack	*next;
+	int		moves_a;
+	int		moves_b;
 
-	position = 0;
-	if (nbr < stacklim->start_value && nbr > stacklim->end_value)
-		return (position);
-	if (nbr < stacklim->min_value)
-		return (get_nbr_position(stack, stacklim->min_value));
-	else if (nbr > stacklim->max_value)
-		return (get_nbr_position(stack, stacklim->max_value));
-	tmp = stack;
-	while (tmp->next != NULL)
+	moves_a = get_supposed_position(infos->stack_a, stacklimit, nbr);
+	if (moves_a > stacklimit->args_a / 2)
+		moves_a = stacklimit->args_a - moves_a;
+	moves_b = get_nbr_position(infos->stack_b, nbr) - 1;
+	if (moves_b > stacklimit->args_b / 2)
+		moves_b = stacklimit->args_b - moves_b;
+	return (moves_a + moves_b + 1);
+}
+
+int	get_nbr_to_move(t_infos *infos, t_stacklimit *stacklimit)
+{
+	int		nbr;
+	int		moves;
+	int		min_moves;
+	t_stack	*tmp;
+
+	min_moves = -1;
+	tmp = infos->stack_b;
+	while (tmp != NULL)
 	{
-		position++;
-		next = tmp->next;
-		if (nbr > tmp->content && nbr < next->content)
-			return (position);
+		moves = get_max_moves(infos, stacklimit, tmp->content);
+		if (min_moves == -1 || moves < min_moves)
+		{
+			nbr = tmp->content;
+			min_moves = moves;
+		}
 		tmp = tmp->next;
 	}
-	return (position);
+	return (nbr);
 }

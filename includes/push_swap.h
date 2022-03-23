@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/22 20:39:08 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:43:15 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@
 
 typedef struct s_stacklimit
 {
-	int	start_value;
-	int	end_value;
-	int	min_value;
-	int	max_value;
-	int	args;
+	int		start_value;
+	int		end_value;
+	int		min_value;
+	int		max_value;
+	float	args_a;
+	float	args_b;
 }	t_stacklimit;
 
 typedef struct s_stack
@@ -75,12 +76,15 @@ int		is_sorted(t_stack *stack);
 int		get_nb_args(t_stack *stack);
 int		get_nbr_position(t_stack *stack, int nbr);
 int		get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr);
+int		get_max_moves(t_infos *infos, t_stacklimit *stacklimit, int nbr);
+int		get_nbr_to_move(t_infos *infos, t_stacklimit *stacklimit);
 
 void	guess_sorting(t_infos *infos);
 void	sort_two(t_stack **stack, t_stack **stack_op);
 void	sort_three(t_stack **stack, t_stack **stack_op);
-void	sort_lis(t_infos *infos);
+void	sort_lis(t_infos *inf);
 void	get_lis_sequence(t_infos *infos, int len_sequence, int previous_len);
+void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit, int nbr);
 // ----------
 
 t_stack	*newlst(int content);
