@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:30:00 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/23 20:42:52 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/24 14:44:31 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,16 @@ int	get_max_moves(t_infos *infos, t_stacklimit *stacklimit, int nbr)
 	int		moves_a;
 	int		moves_b;
 
-	moves_a = get_supposed_position(infos->stack_a, stacklimit, nbr);
-	if (moves_a > stacklimit->args_a / 2)
+	if (nbr < stacklimit->min_value)
+		moves_a = get_nbr_position(infos->stack_a, stacklimit->min_value) - 1;
+	else if (nbr > stacklimit->max_value)
+		moves_a = get_nbr_position(infos->stack_a, stacklimit->max_value);
+	else
+		moves_a = get_supposed_position(infos->stack_a, stacklimit, nbr);
+	if (moves_a > (float)(stacklimit->args_a / 2) + 0.1)
 		moves_a = stacklimit->args_a - moves_a;
 	moves_b = get_nbr_position(infos->stack_b, nbr) - 1;
-	if (moves_b > stacklimit->args_b / 2)
+	if (moves_b > (float)(stacklimit->args_b / 2) + 0.1)
 		moves_b = stacklimit->args_b - moves_b;
 	return (moves_a + moves_b + 1);
 }

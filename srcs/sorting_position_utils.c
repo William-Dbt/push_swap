@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:59:59 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/23 20:34:18 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/24 14:04:49 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ int	get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr)
 	int		position;
 	t_stack	*tmp;
 	t_stack	*next;
-		
-	if (nbr < stacklim->min_value &&
-			get_nbr_position(stack, stacklim->min_value) == 1)
-		return (0);
-	else if (nbr > stacklim->max_value &&
-			get_nbr_position(stack, stacklim->max_value) == stacklim->args_a)
-		return (0);
+
+	if (nbr < stacklim->min_value)
+		return (get_nbr_position(stack, stacklim->min_value) - 1);
+	else if (nbr > stacklim->max_value)
+		return (get_nbr_position(stack, stacklim->max_value));
 	position = 1;
 	tmp = stack;
 	while (tmp != NULL)

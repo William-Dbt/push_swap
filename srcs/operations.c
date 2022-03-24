@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:34:03 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/15 16:28:22 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/24 14:25:37 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	swap(t_stack **stack, t_stack **stack_op, int stack_name)
 	*stack = second;
 	if (stack_name == STACK_A)
 		save_operation(stack_op, SA);
-	else if (stack_name == STACK_B)
+	else
 		save_operation(stack_op, SB);
 }
 
