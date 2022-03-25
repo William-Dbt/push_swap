@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:30:00 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/24 14:44:31 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:44:59 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,28 @@ int	get_nb_args(t_stack *stack)
 	return (args);
 }
 
-void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit, int nbr)
+void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit)
 {
+	int		min;
+	int		max;
 	t_stack	*tmp;
 
 	tmp = infos->stack_a;
 	stacklimit->start_value = tmp->content;
-	nbr = tmp->content;
+	min = tmp->content;
+	max = tmp->content;
 	while (tmp != NULL)
 	{
-		if (tmp->content < nbr)
-			nbr = tmp->content;
+		if (tmp->content < min)
+			min = tmp->content;
+		if (tmp->content > max)
+			max = tmp->content;
 		if (tmp->next == NULL)
 			stacklimit->end_value = tmp->content;
 		tmp = tmp->next;
 	}
-	stacklimit->min_value = nbr;
-	tmp = infos->stack_a;
-	nbr = tmp->content;
-	while (tmp != NULL)
-	{
-		if (tmp->content > nbr)
-			nbr = tmp->content;
-		tmp = tmp->next;
-	}
-	stacklimit->max_value = nbr;
+	stacklimit->min_value = min;
+	stacklimit->max_value = max;
 	stacklimit->args_a = get_nb_args(infos->stack_a);
 	stacklimit->args_b = get_nb_args(infos->stack_b);
 }
@@ -87,10 +84,12 @@ int	get_max_moves(t_infos *infos, t_stacklimit *stacklimit, int nbr)
 		moves_a = get_nbr_position(infos->stack_a, stacklimit->max_value);
 	else
 		moves_a = get_supposed_position(infos->stack_a, stacklimit, nbr);
-	if (moves_a > (float)(stacklimit->args_a / 2) + 0.1)
+	if (moves_a > stacklimit->args_a / 2 && moves_a != stacklimit->args_a)
 		moves_a = stacklimit->args_a - moves_a;
+	else if (moves_a == stacklimit->args_a)
+		moves_a = 0;
 	moves_b = get_nbr_position(infos->stack_b, nbr) - 1;
-	if (moves_b > (float)(stacklimit->args_b / 2) + 0.1)
+	if (get_nbr_direction(stacklimit->args_b, moves_b) == MOVE_DWN)
 		moves_b = stacklimit->args_b - moves_b;
 	return (moves_a + moves_b + 1);
 }

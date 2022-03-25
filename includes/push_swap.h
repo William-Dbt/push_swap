@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/23 20:43:15 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:33:13 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define RRB		7
 # define STACK_A	10
 # define STACK_B	11
+# define MOVE_UP	12
+# define MOVE_DWN	13
 
 typedef struct s_stacklimit
 {
@@ -34,8 +36,8 @@ typedef struct s_stacklimit
 	int		end_value;
 	int		min_value;
 	int		max_value;
-	float	args_a;
-	float	args_b;
+	int		args_a;
+	int		args_b;
 }	t_stacklimit;
 
 typedef struct s_stack
@@ -74,8 +76,6 @@ void	save_operation(t_stack **stack_op, int operation);
 // SORTING
 int		is_sorted(t_stack *stack);
 int		get_nb_args(t_stack *stack);
-int		get_nbr_position(t_stack *stack, int nbr);
-int		get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr);
 int		get_max_moves(t_infos *infos, t_stacklimit *stacklimit, int nbr);
 int		get_nbr_to_move(t_infos *infos, t_stacklimit *stacklimit);
 
@@ -84,7 +84,13 @@ void	sort_two(t_stack **stack, t_stack **stack_op);
 void	sort_three(t_stack **stack, t_stack **stack_op);
 void	sort_lis(t_infos *inf);
 void	get_lis_sequence(t_infos *infos, int len_sequence, int previous_len);
-void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit, int nbr);
+void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit);
+// ----------
+
+// POSITIONS
+int		get_nbr_direction(int args, int pos);
+int		get_nbr_position(t_stack *stack, int nbr);
+int		get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr);
 // ----------
 
 t_stack	*newlst(int content);

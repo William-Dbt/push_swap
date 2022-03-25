@@ -6,11 +6,33 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:59:59 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/24 14:04:49 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:29:33 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	get_nbr_direction(int args, int pos)
+{
+	int	tmp;
+
+	tmp = args;
+	if (tmp % 2 == 0)
+	{
+		if (pos <= args / 2)
+			return (MOVE_UP);
+		else
+			return (MOVE_DWN);
+	}
+	else
+	{
+		if (pos <= args + 1)
+			return (MOVE_UP);
+		else
+			return (MOVE_DWN);
+	}
+	return (0);
+}
 
 int	get_nbr_position(t_stack *stack, int nbr)
 {
