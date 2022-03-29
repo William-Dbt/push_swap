@@ -3,40 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 13:53:01 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/29 16:26:50 by wdebotte         ###   ########.fr       */
+/*   Created: 2022/03/21 14:06:56 by wdebotte          #+#    #+#             */
+/*   Updated: 2022/03/22 16:17:28 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pstack(t_stack *stacktmp)
+void	pre_lis_sort(t_stack *lis, t_infos *infos)
 {
-	t_stack	*stack;
+	int		lis_args;
+	t_stack	*lis_tmp;
 
-	stack = stacktmp;
-	ft_putstr("###\n");
-	ft_printf("nb_args: %i\n", get_nb_args(stack));
-	while (stack != NULL)
+	lis_args = get_nb_args(lis);
+	lis_tmp = lis;
+	while (get_nb_args(infos->stack_a) != lis_args)
 	{
-		if (stack->next != NULL)
-			ft_printf("%i, ", stack->content);
+		if (lis_tmp == NULL || infos->stack_a->content != lis_tmp->content)
+			push(&infos->stack_a, &infos->stack_b, &infos->stack_op, STACK_B);
 		else
-			ft_printf("%i\n", stack->content);
-		stack = stack->next;
+		{
+			rotate(&infos->stack_a, &infos->stack_op, STACK_A);
+			lis_tmp = lis_tmp->next;
+		}
 	}
-	ft_putstr("###\n");
+	freestack(lis);
 }
 
-int	get_len_sequence(int ref, t_stack *first_ref)
+int	get_len_sequence(int ref, t_stack *first_ptr)
 {
 	int		len;
 	t_stack	*tmp;
 
 	len = 1;
-	tmp = first_ref;
+	tmp = first_ptr;
 	while (tmp != NULL)
 	{
 		if (tmp->content > ref)
@@ -77,18 +79,12 @@ t_stack	*fill_lis_sequence(t_stack *lis, t_stack *first, t_stack *next)
 
 void	get_lis_sequence(t_infos *infos, int len_sequence, int previous_len)
 {
-	int		min_value;
-	t_stack	*stack_tmp;
-	t_stack	*tmp;
-	t_stack	*next;
-	t_stack	*lis;
+	t_stack			*tmp;
+	t_stack			*next;
+	t_stack			*lis;
 
 	lis = NULL;
-	min_value = get_min_value(infos->stack_a);
-	stack_tmp = stackdup(infos->stack_a);
-	while (stack_tmp->content != min_value)
-		rotate_mute(&stack_tmp);
-	tmp = stack_tmp;
+	tmp = infos->stack_a;
 	while (tmp != NULL)
 	{
 		next = tmp->next;
@@ -105,6 +101,6 @@ void	get_lis_sequence(t_infos *infos, int len_sequence, int previous_len)
 		}
 		tmp = tmp->next;
 	}
-	freestack(stack_tmp);
-	pstack(lis);
+	if (lis != NULL)
+		pre_lis_sort(lis, infos);
 }

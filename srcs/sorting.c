@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 12:40:51 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/25 16:31:25 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/29 13:50:32 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	move_stacks(t_infos *inf, t_stacklimit *stacklimit, int moves, int nbr)
 		return (0);
 	}
 	pos = get_nbr_position(inf->stack_b, nbr);
-	if (pos != 1 && moves--)
+	if (pos != 1 && moves-- > 1)
 	{
 		if (get_nbr_direction(stacklimit->args_b, pos) == MOVE_UP)
 			rotate(&inf->stack_b, &inf->stack_op, STACK_B);
@@ -30,7 +30,7 @@ int	move_stacks(t_infos *inf, t_stacklimit *stacklimit, int moves, int nbr)
 			rrotate(&inf->stack_b, &inf->stack_op, STACK_B);
 	}
 	pos = get_supposed_position(inf->stack_a, stacklimit, nbr);
-	if (pos != 0 && moves--)
+	if (pos != 0 && moves-- > 1)
 	{
 		if (pos <= stacklimit->args_a / 2)
 			rotate(&inf->stack_a, &inf->stack_op, STACK_A);
@@ -42,13 +42,13 @@ int	move_stacks(t_infos *inf, t_stacklimit *stacklimit, int moves, int nbr)
 
 void	sort_lis(t_infos *inf)
 {
-	int				pos;
+	/*int				pos;
 	int				moves;
 	int				nbr;
-	t_stacklimit	stacklimit;
+	t_stacklimit	stacklimit;*/
 
 	get_lis_sequence(inf, 0, 0);
-	while (inf->stack_b != NULL)
+	/*while (inf->stack_b != NULL)
 	{
 		get_stack_limit(inf, &stacklimit);
 		nbr = get_nbr_to_move(inf, &stacklimit);
@@ -64,5 +64,5 @@ void	sort_lis(t_infos *inf)
 			rrotate(&inf->stack_a, &inf->stack_op, STACK_A);
 		else
 			rotate(&inf->stack_a, &inf->stack_op, STACK_A);
-	}
+	}*/
 }

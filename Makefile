@@ -6,7 +6,7 @@
 #    By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 14:12:28 by wdebotte          #+#    #+#              #
-#    Updated: 2022/03/25 16:34:01 by wdebotte         ###   ########.fr        #
+#    Updated: 2022/03/29 14:14:50 by wdebotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRCS		= ${PATHSRCS}main.c \
 			${PATHSRCS}sorting_short.c \
 			${PATHSRCS}sorting_utils.c \
 			${PATHSRCS}sorting_position_utils.c \
-			${PATHSRCS}lis.c
+			${PATHSRCS}lis.c \
+			${PATHSRCS}lis_utils.c
 
 OBJS		= ${SRCS:.c=.o}
 HEADERS		= ${PATHHEADERS}push_swap.h

@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/25 16:33:13 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/29 14:07:12 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		get_nbr_to_move(t_infos *infos, t_stacklimit *stacklimit);
 void	guess_sorting(t_infos *infos);
 void	sort_two(t_stack **stack, t_stack **stack_op);
 void	sort_three(t_stack **stack, t_stack **stack_op);
+void	sort_selection(t_infos *infos);
 void	sort_lis(t_infos *inf);
 void	get_lis_sequence(t_infos *infos, int len_sequence, int previous_len);
 void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit);
@@ -91,6 +92,12 @@ void	get_stack_limit(t_infos *infos, t_stacklimit *stacklimit);
 int		get_nbr_direction(int args, int pos);
 int		get_nbr_position(t_stack *stack, int nbr);
 int		get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr);
+// ----------
+
+// LIS
+int		get_min_value(t_stack *stack);
+void	rotate_mute(t_stack **stack);
+t_stack	*stackdup(t_stack *stack);
 // ----------
 
 t_stack	*newlst(int content);
