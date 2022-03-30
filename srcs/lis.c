@@ -6,28 +6,46 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 13:53:01 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/29 16:26:50 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:45:02 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pstack(t_stack *stacktmp)
-{
-	t_stack	*stack;
+typedef struct s_lis
+{	
+	int		min_value;
+	t_stack	*stack_tmp;
+	t_stack	*tmp;
+	t_stack	*next;
+	t_stack	*lis;
+}	t_lis;
 
-	stack = stacktmp;
-	ft_putstr("###\n");
-	ft_printf("nb_args: %i\n", get_nb_args(stack));
-	while (stack != NULL)
+void	pre_lis_sort(t_infos *inf, t_stack *lis)
+{
+	int		position;
+	t_stack	*tmp;
+
+	tmp = inf->stack_a;
+	while (tmp != NULL)
 	{
-		if (stack->next != NULL)
-			ft_printf("%i, ", stack->content);
-		else
-			ft_printf("%i\n", stack->content);
-		stack = stack->next;
+		if (is_nbr_in_lis(lis, tmp->content) == 1)
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		position = get_nbr_position(inf->stack_a, tmp->content);
+		while (inf->stack_a->content != tmp->content)
+		{
+			if (position <= get_nb_args(inf->stack_a) / 2)
+				rotate(&inf->stack_a, &inf->stack_op, STACK_A);
+			else
+				rrotate(&inf->stack_a, &inf->stack_op, STACK_A);
+		}
+		push(&inf->stack_a, &inf->stack_b, &inf->stack_op, STACK_B);
+		tmp = inf->stack_a;
 	}
-	ft_putstr("###\n");
+	freestack(lis);
 }
 
 int	get_len_sequence(int ref, t_stack *first_ref)
@@ -66,45 +84,46 @@ t_stack	*fill_lis_sequence(t_stack *lis, t_stack *first, t_stack *next)
 	{
 		if (previous < next->content)
 		{
-			seq_tmp->next = newlst(next->content);
-			seq_tmp = seq_tmp->next;
+			sequence->next = newlst(next->content);
+			sequence = sequence->next;
 			previous = next->content;
 		}
 		next = next->next;
 	}
-	return (sequence);
+	return (seq_tmp);
+}
+
+void	init_lis_struct(t_lis *lis, t_infos *infos)
+{
+	lis->lis = NULL;
+	lis->min_value = get_min_value(infos->stack_a);
+	lis->stack_tmp = stackdup(infos->stack_a);
 }
 
 void	get_lis_sequence(t_infos *infos, int len_sequence, int previous_len)
 {
-	int		min_value;
-	t_stack	*stack_tmp;
-	t_stack	*tmp;
-	t_stack	*next;
-	t_stack	*lis;
+	t_lis	lis;
 
-	lis = NULL;
-	min_value = get_min_value(infos->stack_a);
-	stack_tmp = stackdup(infos->stack_a);
-	while (stack_tmp->content != min_value)
-		rotate_mute(&stack_tmp);
-	tmp = stack_tmp;
-	while (tmp != NULL)
+	init_lis_struct(&lis, infos);
+	while (lis.stack_tmp->content != lis.min_value)
+		rotate_mute(&lis.stack_tmp);
+	lis.tmp = lis.stack_tmp;
+	while (lis.tmp != NULL)
 	{
-		next = tmp->next;
-		while (next != NULL)
+		lis.next = lis.tmp->next;
+		while (lis.next != NULL)
 		{
-			if (next->content > tmp->content)
-				previous_len = get_len_sequence(tmp->content, next);
+			if (lis.next->content > lis.tmp->content)
+				previous_len = get_len_sequence(lis.tmp->content, lis.next);
 			if (previous_len > len_sequence)
 			{
 				len_sequence = previous_len;
-				lis = fill_lis_sequence(lis, tmp, next);
+				lis.lis = fill_lis_sequence(lis.lis, lis.tmp, lis.next);
 			}
-			next = next->next;
+			lis.next = lis.next->next;
 		}
-		tmp = tmp->next;
+		lis.tmp = lis.tmp->next;
 	}
-	freestack(stack_tmp);
-	pstack(lis);
+	freestack(lis.stack_tmp);
+	pre_lis_sort(infos, lis.lis);
 }

@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:09:33 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/29 14:07:12 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:39:26 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int		get_supposed_position(t_stack *stack, t_stacklimit *stacklim, int nbr);
 
 // LIS
 int		get_min_value(t_stack *stack);
+int		is_nbr_in_lis(t_stack *lis, int nbr);
+
 void	rotate_mute(t_stack **stack);
 t_stack	*stackdup(t_stack *stack);
 // ----------

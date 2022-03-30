@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:04:48 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/29 15:26:39 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:51:00 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ void	rotate_mute(t_stack **stack)
 	tmp->next = first;
 	first->next = NULL;
 	*stack = second;
+}
+
+int	is_nbr_in_lis(t_stack *lis, int nbr)
+{
+	t_stack	*tmp;
+
+	tmp = lis;
+	while (tmp != NULL)
+	{
+		if (tmp->content == nbr)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 int	get_min_value(t_stack *stack)

@@ -6,33 +6,11 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:08:53 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/29 16:07:25 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:51:16 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	print_stack(t_stack *stack_a, t_stack *stack_b)
-{
-	t_stack	*tmp_a;
-	t_stack	*tmp_b;
-
-	tmp_a = stack_a;
-	tmp_b = stack_b;
-	while (tmp_a != NULL || tmp_b != NULL)
-	{
-		if (tmp_b != NULL && tmp_a != NULL)
-			ft_printf("%i\t\t| %i\n", tmp_a->content, tmp_b->content);
-		else if (tmp_b == NULL)
-			ft_printf("%i\t\t| (NULL)\n", tmp_a->content);
-		else
-			ft_printf("(NULL)\t\t| %i\n", tmp_b->content);
-		if (tmp_a != NULL)
-			tmp_a = tmp_a->next;
-		if (tmp_b != NULL)
-			tmp_b = tmp_b->next;
-	}
-}
 
 void	guess_sorting(t_infos *infos)
 {
@@ -40,8 +18,8 @@ void	guess_sorting(t_infos *infos)
 		sort_two(&infos->stack_a, &infos->stack_op);
 	else if (infos->nb_args == 3)
 		sort_three(&infos->stack_a, &infos->stack_op);
-//	else if (infos->nb_args < 40)
-//		sort_selection(infos);
+	else if (infos->nb_args < 40)
+		sort_selection(infos);
 	else
 		sort_lis(infos);
 }
@@ -81,8 +59,7 @@ int	main(int args, char **argv)
 		return (0);
 	else if (infos.nb_args >= 2)
 		guess_sorting(&infos);
-//	print_operations(infos.stack_op);
-//	print_stack(infos.stack_a, infos.stack_b);
+	print_operations(infos.stack_op);
 	freestack(infos.stack_a);
 	freestack(infos.stack_op);
 	return (0);
