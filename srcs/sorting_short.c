@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:54:04 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/29 12:28:39 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:00:26 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	sort_three(t_stack **stack, t_stack **stack_op)
 
 int	get_min_pos(t_stack *stack)
 {
-	int		position;
 	int		nbr;
+	int		position;
 	int		nbr_position;
 	t_stack	*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: wdebotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:42:45 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/15 12:19:13 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:48:53 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	count_args(char **argv)
 
 int	add_to_tab(int *int_tab, char *str, char **str_tab)
 {
-	int			i;
+	int	i;
 
-	i = 0;
-	if (str[i] == '\0')
+	if (str[0] == '\0')
 		return (exit_program(int_tab, str_tab));
+	i = 0;
 	if (ft_strlen(str) > 1 && (str[i] == '-' || str[i] == '+'))
 		i++;
 	while (str[i] != '\0')
@@ -55,7 +55,7 @@ int	add_to_tab(int *int_tab, char *str, char **str_tab)
 			return (exit_program(int_tab, str_tab));
 		i++;
 	}
-	if (ft_atoi(str) > 2147483647 || ft_atoi(str) < -2147483648)
+	if (ft_atoli(str) > 2147483647 || ft_atoli(str) < -2147483648)
 		return (exit_program(int_tab, str_tab));
 	return (ft_atoi(str));
 }
