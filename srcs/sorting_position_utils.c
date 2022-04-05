@@ -6,7 +6,7 @@
 /*   By: wdebotte <wdebotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:59:59 by wdebotte          #+#    #+#             */
-/*   Updated: 2022/03/30 18:50:10 by wdebotte         ###   ########.fr       */
+/*   Updated: 2022/04/05 13:20:40 by wdebotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	get_nbr_direction(int args, int pos)
 	}
 	else
 	{
+// Must do (args + 1) / 2 and debug
 		if (pos <= args + 1)
 			return (MOVE_UP);
 		else
