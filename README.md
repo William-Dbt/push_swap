@@ -43,8 +43,3 @@ To sort numbers from **5 to 40**, I just the **selection sort algorithm** (you c
 To sort numbers **after 40** I use first the [**Longest Inscreasing Subsequence**](https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/ "**Longest Inscreasing Subsequence**"), many explanations can be found on internet but the goal is to **take the longest sequence of numbers that are already sorted**. All the other numbers are moved to the stack B and you get the longest increasing subsequence in your stack. This method reduce a lot your futures operations because you'll not moving the numbers.  
 When this part is done, I'm just looking for **the number that needs the least amount of operations possible** to be well-placed in the stack A and I move this one. I repeat the operation **while the stack B** isn't empty.  
 When the stack B is empty it means that all numbers are placed in the stack A, we just have to **rotate/rrotate while the minimum is on the top** of the stack A.  
-
-## Score
-
-[![wdebotte's 42 push_swap Score](https://badge42.vercel.app/api/v2/cl2zu1sil002509mf9zd91hy6/project/2492647)](https://github.com/JaeSeoKim/badge42)  
-**Nb: A little bug that is present in my code that not sorting in the good way at the end of the program but this algorithm can helps you to get 100/100.**
